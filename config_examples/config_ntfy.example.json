@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schema.freqtrade.io/schema.json",
+    "max_open_trades": 3,
+    "stake_currency": "USDT",
+    "stake_amount": 30,
+    "tradable_balance_ratio": 0.99,
+    "fiat_display_currency": "USD",
+    "timeframe": "5m",
+    "dry_run": true,
+    "dry_run_wallet": 1000,
+    "cancel_open_orders_on_exit": false,
+    "exchange": {
+        "name": "binance",
+        "api_key": "",
+        "secret": "",
+        "ccxt_config": {},
+        "ccxt_async_config": {},
+        "pair_whitelist": [
+            "BTC/USDT",
+            "ETH/USDT"
+        ],
+        "pair_blacklist": []
+    },
+    "pairlists": [
+        {
+            "method": "StaticPairList"
+        }
+    ],
+    "entry_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1,
+        "price_last_balance": 0,
+        "check_depth_of_market": {
+            "enabled": false,
+            "bids_to_ask_delta": 1
+        }
+    },
+    "exit_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1
+    },
+    "strategy": "SampleStrategy",
+    "strategy_path": "/freqtrade/freqtrade/templates",
+    "webhook": {
+        "enabled": true,
+        "url": "https://ntfy.sh/Tintin?title=Freqtrade%20trade%20alert&priority=high&tags=chart_with_upwards_trend",
+        "format": "raw",
+        "entry_fill": {
+            "data": "ENTRY FILLED: {direction} {pair} at {open_rate:.8f} (trade #{trade_id})."
+        },
+        "exit_fill": {
+            "data": "EXIT FILLED: {direction} {pair} at {close_rate:.8f}; reason={exit_reason}; P/L={profit_ratio:.2%} (trade #{trade_id})."
+        }
+    },
+    "bot_name": "freqtrade-dry-run",
+    "initial_state": "running",
+    "internals": {
+        "process_throttle_secs": 5
+    }
+}
